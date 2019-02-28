@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Inquiry
@@ -154,6 +156,20 @@ class Inquiry
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param ClassMetadata $metadata
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('email', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('email', new Assert\Email());
+        $metadata->addPropertyConstraint('message', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('message', new Assert\Length([
+            'max'        => 1000,
+            'maxMessage' => 'Message cannot be longer than {{ limit }} characters',
+        ]));
     }
 }
 
