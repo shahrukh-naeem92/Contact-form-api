@@ -164,12 +164,36 @@ class Inquiry
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('email', new Assert\NotBlank());
-        $metadata->addPropertyConstraint('email', new Assert\Email());
+        $metadata->addPropertyConstraint('email', new Assert\Email([
+            'message' => 'The email "{{ value }}" is not a valid email.'
+        ]));
         $metadata->addPropertyConstraint('message', new Assert\NotBlank());
         $metadata->addPropertyConstraint('message', new Assert\Length([
             'max'        => 1000,
             'maxMessage' => 'Message cannot be longer than {{ limit }} characters',
         ]));
+    }
+
+    /**
+     * @return $this
+     */
+    public function preInsert() :self
+    {
+        $date = new \DateTime();
+        $this->createdAt = $date;
+        $this->updatedAt = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function preUpdate() :self
+    {
+        $this->updatedAt = new \DateTime();
+
+        return $this;
     }
 }
 
