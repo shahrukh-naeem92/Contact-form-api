@@ -177,27 +177,5 @@ class Inquiry
             'maxMessage' => 'Message cannot be longer than 1000 characters',
         ]));
     }
-
-    /**
-     * @return $this
-     */
-    public function preInsert() : Inquiry
-    {
-        $date = new \DateTime();
-        $this->createdAt = $date;
-        $this->updatedAt = $date;
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function preUpdate() : Inquiry
-    {
-        $this->updatedAt = new \DateTime();
-
-        return $this;
-    }
 }
 

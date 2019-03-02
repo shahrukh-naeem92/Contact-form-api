@@ -35,7 +35,6 @@ class InquiryController extends FOSRestController
             $repository = $this->getDoctrine()->getRepository(Inquiry::class);
             $repository->validateInquiry($inquiry);
             $em = $this->getDoctrine()->getManager();
-            $inquiry->preInsert();
             $em->persist($inquiry);
             $em->flush();
 
@@ -52,7 +51,7 @@ class InquiryController extends FOSRestController
             return new View(
                 [
                     'message' => 'Something went wrong. Please try again after some time.',
-                    'status' => Response::HTTP_INTERNAL_SERVER_ERROR  // send 500 in the response message so that respective action could be performed
+                    'status' => Response::HTTP_INTERNAL_SERVER_ERROR  // send 500 in the message so that respective action could be performed
                 ],
                     Response::HTTP_OK  // send 200 as the response code
             );
