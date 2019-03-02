@@ -10,9 +10,8 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  */
 class Helper
 {
-
     /**
-     * @param ConstraintViolationList $errors
+     * @param ConstraintViolationListInterface $errors
      * @return string
      */
     public function handleValidationErrorMessages(ConstraintViolationListInterface $errors) : string

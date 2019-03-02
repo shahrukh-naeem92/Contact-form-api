@@ -57,7 +57,7 @@ class Inquiry
      *
      * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -69,7 +69,7 @@ class Inquiry
      *
      * @return Inquiry
      */
-    public function setEmail($email)
+    public function setEmail($email) : Inquiry
     {
         $this->email = $email;
 
@@ -81,7 +81,7 @@ class Inquiry
      *
      * @return string
      */
-    public function getEmail()
+    public function getEmail() : string
     {
         return $this->email;
     }
@@ -93,7 +93,7 @@ class Inquiry
      *
      * @return Inquiry
      */
-    public function setMessage($message)
+    public function setMessage($message) : Inquiry
     {
         $this->message = $message;
 
@@ -105,7 +105,7 @@ class Inquiry
      *
      * @return string
      */
-    public function getMessage()
+    public function getMessage() : string
     {
         return $this->message;
     }
@@ -117,7 +117,7 @@ class Inquiry
      *
      * @return Inquiry
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt) : Inquiry
     {
         $this->createdAt = $createdAt;
 
@@ -129,7 +129,7 @@ class Inquiry
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt() : \DateTime
     {
         return $this->createdAt;
     }
@@ -141,7 +141,7 @@ class Inquiry
      *
      * @return Inquiry
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updatedAt) : Inquiry
     {
         $this->updatedAt = $updatedAt;
 
@@ -153,7 +153,7 @@ class Inquiry
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt() : \DateTime
     {
         return $this->updatedAt;
     }
@@ -161,23 +161,27 @@ class Inquiry
     /**
      * @param ClassMetadata $metadata
      */
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    public static function loadValidatorMetadata(ClassMetadata $metadata) : void
     {
-        $metadata->addPropertyConstraint('email', new Assert\NotBlank());
-        $metadata->addPropertyConstraint('email', new Assert\Email([
-            'message' => 'The email "{{ value }}" is not a valid email.'
+        $metadata->addPropertyConstraint('email', new Assert\NotBlank([
+            'message' => 'Email cannot be blank.'
         ]));
-        $metadata->addPropertyConstraint('message', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('email', new Assert\Email([
+            'message' => 'The email {{ value }} is not a valid email.'
+        ]));
+        $metadata->addPropertyConstraint('message', new Assert\NotBlank([
+            'message' => 'Message cannot be blank.'
+        ]));
         $metadata->addPropertyConstraint('message', new Assert\Length([
             'max'        => 1000,
-            'maxMessage' => 'Message cannot be longer than {{ limit }} characters',
+            'maxMessage' => 'Message cannot be longer than 1000 characters',
         ]));
     }
 
     /**
      * @return $this
      */
-    public function preInsert() :self
+    public function preInsert() : Inquiry
     {
         $date = new \DateTime();
         $this->createdAt = $date;
@@ -189,7 +193,7 @@ class Inquiry
     /**
      * @return $this
      */
-    public function preUpdate() :self
+    public function preUpdate() : Inquiry
     {
         $this->updatedAt = new \DateTime();
 
