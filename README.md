@@ -1,77 +1,73 @@
-Symfony Standard Edition
-========================
+Contact Form Api
+===========
 
-**WARNING**: This distribution does not support Symfony 4. See the
-[Installing & Setting up the Symfony Framework][15] page to find a replacement
-that fits you best.
+Api for receiving contact form information and save it in database after validation.
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+Built With
+-------------------
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Php
 
-What's inside?
---------------
+Symfony
 
-The Symfony Standard Edition is configured with the following defaults:
+Mysql
 
-  * An AppBundle you can use to start coding;
+Phpunit
 
-  * Twig as the only configured template engine;
+Coding Standards
+----------------
 
-  * Doctrine ORM/DBAL;
+Psr-2 for coding guidelines.
 
-  * Swiftmailer;
+psr-4 for auto loading.
 
-  * Annotations enabled for everything.
+Getting Started
+---------------
+These instructions will get you a copy of the project up and running on your local machine.
 
-It comes pre-configured with the following bundles:
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+Prerequisites
+-------------
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+Php 7.x
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+Mysql 5.x
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+Composer
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
+Installing
+----------
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
+Follow these steps to setup the project localy
 
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
+1) Clone or download this repo in your local machines.
+2) Go to project root directory and run composer install from command line.
+3) Adjust database credentials in app/config/parameters.yml file accordingly.
+4) Run all migrations by running php bin/console doctrine:migrations:migrate from command line. This step will set up the database schema automatically.
+5) Do appropriate web server configuration for landing the request to web/app.php or web/app_dev.php depending on the environment (production or development).
 
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
+After these steps project will be up and running.
 
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
+Usage
+-----
 
-  * [**SensioGeneratorBundle**][13] (in dev env) - Adds code generation
-    capabilities
+Send a http post request to http(s)://yourdomain.com/inquiry with following two parameters in request body
 
-  * [**WebServerBundle**][14] (in dev env) - Adds commands for running applications
-    using the PHP built-in web server
+1) email - a valid email address
+2) message - a message less than 1000 characters.
 
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
+Your message will be persisted to the database if it passes the validations.
 
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
+Running the tests
+-----------------
 
-Enjoy!
+All the test cases reside in the tests directory on the root. For running all the test 
+go to the project directory and run ./vendor/bin/simple-phpunit from command line.
 
-[1]:  https://symfony.com/doc/3.4/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.4/doctrine.html
-[8]:  https://symfony.com/doc/3.4/templating.html
-[9]:  https://symfony.com/doc/3.4/security.html
-[10]: https://symfony.com/doc/3.4/email.html
-[11]: https://symfony.com/doc/3.4/logging.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
-[14]: https://symfony.com/doc/current/setup/built_in_web_server.html
-[15]: https://symfony.com/doc/current/setup.html
+Code Documentation
+------------------
+
+You can read the coding documentation here https://docs.google.com/document/d/1cl7RNM4QuZdfLRMtSbvVapu82m3-eC24o76nwqM70VM/edit?usp=sharing
+                                    
+                                    
+                                    
