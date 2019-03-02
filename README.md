@@ -56,7 +56,12 @@ Send a http post request to http(s)://yourdomain.com/inquiry with following two 
 1) email - a valid email address
 2) message - a message less than 1000 characters.
 
-Your message will be persisted to the database if it passes the validations.
+Your message will be persisted to the database if it passes the validations or an error message will be returned in the response. Response is returned in json format a sample response is provided below
+
+{
+    "message": "Message sent successfully.",
+    "status": 200
+}
 
 Running the tests
 -----------------
