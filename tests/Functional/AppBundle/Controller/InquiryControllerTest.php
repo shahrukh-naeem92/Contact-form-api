@@ -28,8 +28,8 @@ class InquiryControllerTest extends WebTestCase
         string $email,
         string $message,
         string $expectedMessage,
-        \int $expectedResponseCode,
-        \int $expectedMessageCode
+        int $expectedResponseCode,
+        int $expectedMessageCode
     ) : void {
         $client = static::createClient();
         $client->request('Post', '/inquiry', ['email' => $email, 'message' => $message]);
