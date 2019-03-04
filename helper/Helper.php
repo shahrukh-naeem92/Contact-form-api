@@ -11,7 +11,10 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 class Helper
 {
     /**
+     * Converts ConstraintViolationListInterface object to a concatenated string of errors separated by comma.
+     *
      * @param ConstraintViolationListInterface $errors
+     *
      * @return string
      */
     public function handleValidationErrorMessages(ConstraintViolationListInterface $errors) : string

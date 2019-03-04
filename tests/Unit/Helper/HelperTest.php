@@ -14,9 +14,12 @@ use Symfony\Component\Validator\Validation;
 class HelperTest extends TestCase
 {
     /**
+     * Tests handleValidationErrorMessages function of helper class.
+     *
      * @param string $email
      * @param string $message
      * @param string $expected
+     *
      * @dataProvider handleValidationErrorMessagesProvider
      */
     public function testHandleValidationErrorMessages(string $email, string $message, string $expected) : void
@@ -30,7 +33,6 @@ class HelperTest extends TestCase
             ->getValidator();
         $errors = $validator->validate($inquiry);
         $this->assertEquals($expected, $helper->handleValidationErrorMessages($errors));
-
     }
 
     /**

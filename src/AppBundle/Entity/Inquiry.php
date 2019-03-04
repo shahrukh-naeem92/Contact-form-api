@@ -159,7 +159,11 @@ class Inquiry
     }
 
     /**
+     * Returns validation rules for this entity
+     *
      * @param ClassMetadata $metadata
+     *
+     * @return void
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata) : void
     {

@@ -12,15 +12,25 @@ class InquiryControllerTest extends WebTestCase
 {
 
     /**
+     * Tests post action of the inquiry controller.
+     *
      * @param string $email
      * @param string $message
      * @param string $expectedMessage
      * @param int $expectedResponseCode
      * @param int $expectedMessageCode
+     *
      * @dataProvider postInquiryProvider
+     *
+     * @return void
      */
-    public function testPostInquiry(string $email, string $message, string $expectedMessage ,int $expectedResponseCode, int $expectedMessageCode) : void
-    {
+    public function testPostInquiry(
+        string $email,
+        string $message,
+        string $expectedMessage,
+        \int $expectedResponseCode,
+        \int $expectedMessageCode
+    ) : void {
         $client = static::createClient();
         $client->request('Post', '/inquiry', ['email' => $email, 'message' => $message]);
         $content = json_decode($client->getResponse()->getContent(), true);
@@ -56,6 +66,8 @@ class InquiryControllerTest extends WebTestCase
 
     /**
      * Delete all rows inserted during tests
+     *
+     * @return void
      */
     public function tearDown() : void
     {
@@ -67,7 +79,9 @@ class InquiryControllerTest extends WebTestCase
             ->get('doctrine')
             ->getEntityManager();
 
-        $query = $em->createQuery("DELETE AppBundle:Inquiry i WHERE i.email = 'test@test.com' AND i.message = 'test message'");
+        $query = $em->createQuery(
+            "DELETE AppBundle:Inquiry i WHERE i.email = 'test@test.com' AND i.message = 'test message'"
+        );
         $query->execute();
     }
 }

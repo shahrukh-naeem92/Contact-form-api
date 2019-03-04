@@ -12,7 +12,10 @@ use AppBundle\Entity\Inquiry;
 class DateHandler
 {
     /**
+     * Sets date fields for entity before inserting it into the database.
+     *
      * @param LifecycleEventArgs $args
+     *
      * @return Void
      */
     public function prePersist(LifecycleEventArgs $args) : Void
@@ -27,7 +30,10 @@ class DateHandler
     }
 
     /**
+     * update date fields for entity before updating in database.
+     *
      * @param LifecycleEventArgs $args
+     *
      * @return Void
      */
     public function preUpdate(LifecycleEventArgs $args) : Void

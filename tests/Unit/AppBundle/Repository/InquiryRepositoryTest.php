@@ -19,6 +19,8 @@ class InquiryRepositoryTest extends KernelTestCase
 
     /**
      * sets up entity manager
+     *
+     * @return void
      */
     protected function setUp() : void
     {
@@ -30,9 +32,14 @@ class InquiryRepositoryTest extends KernelTestCase
     }
 
     /**
+     * Tests validateInquiry method of InquiryRepository class.
+     *
      * @param string $email
      * @param string $message
-     * @dataProvider ValidateInquiryProvider
+     *
+     * @dataProvider validateInquiryProvider
+     *
+     * @return void
      */
     public function testValidateInquiry(string $email, string $message) : void
     {
@@ -43,22 +50,17 @@ class InquiryRepositoryTest extends KernelTestCase
         $inquiry->setMessage($message);
 
         if (empty($email) || empty($message)) {
-
             $this->expectException(\InvalidArgumentException::class);
             $repo->validateInquiry($inquiry);
-
         } else {
-
             $this->assertEquals('', $repo->validateInquiry($inquiry));
-
         }
-
     }
 
     /**
      * @return array
      */
-    public function ValidateInquiryProvider() : array
+    public function validateInquiryProvider() : array
     {
         return [
             [
@@ -75,6 +77,8 @@ class InquiryRepositoryTest extends KernelTestCase
 
     /**
      * close and release entity manager
+     *
+     * @return void
      */
     protected function tearDown() : void
     {
