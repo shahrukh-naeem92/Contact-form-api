@@ -7,7 +7,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
-use AppBundle\EntityHandlers\Inquiry;
+use AppBundle\EntityHandlers\InquiryHandler;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -30,7 +30,7 @@ class InquiryController extends FOSRestController
     {
 
         try {
-            $inquiryHandler = new Inquiry($this->getDoctrine()->getManager());
+            $inquiryHandler = new InquiryHandler($this->getDoctrine()->getManager());
             if($inquiryHandler->create(
                 [
                 'email' => $request->get('email', ''),

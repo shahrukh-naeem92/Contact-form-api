@@ -3,10 +3,10 @@
 namespace AppBundle\EntityHandlers;
 
 /**
- * Abstract EntityHandlerAbstract
+ * Abstract HandlerAbstract
  * @package AppBundle\EntityHandlers
  */
-Abstract class EntityHandlerAbstract
+Abstract class HandlerAbstract
 {
 
     /**

@@ -2,15 +2,15 @@
 
 namespace AppBundle\EntityHandlers;
 
-use AppBundle\Entity\Inquiry as Entity;
+use AppBundle\Entity\Inquiry;
 use Utils\Validations\InquiryValidator;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Class Inquiry
+ * Class InquiryHandler
  * @package AppBundle\EntityHandlers
  */
-class Inquiry extends EntityHandlerAbstract
+class InquiryHandler extends HandlerAbstract
 {
 
     /**
@@ -36,7 +36,7 @@ class Inquiry extends EntityHandlerAbstract
      */
     protected function setEntity(): void
     {
-        $this->entity = new Entity();
+        $this->entity = new Inquiry();
     }
 
     /**
