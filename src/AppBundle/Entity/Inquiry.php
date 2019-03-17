@@ -57,7 +57,7 @@ class Inquiry
      *
      * @return int
      */
-    public function getId() : int
+    public function getId() : ?int
     {
         return $this->id;
     }
@@ -81,7 +81,7 @@ class Inquiry
      *
      * @return string
      */
-    public function getEmail() : string
+    public function getEmail() : ?string
     {
         return $this->email;
     }
@@ -105,7 +105,7 @@ class Inquiry
      *
      * @return string
      */
-    public function getMessage() : string
+    public function getMessage() : ?string
     {
         return $this->message;
     }
@@ -129,7 +129,7 @@ class Inquiry
      *
      * @return \DateTime
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt() : ?\DateTime
     {
         return $this->createdAt;
     }
@@ -153,7 +153,7 @@ class Inquiry
      *
      * @return \DateTime
      */
-    public function getUpdatedAt() : \DateTime
+    public function getUpdatedAt() : ?\DateTime
     {
         return $this->updatedAt;
     }

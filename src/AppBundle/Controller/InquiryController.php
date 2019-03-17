@@ -7,7 +7,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
-use AppBundle\Entity\Inquiry;
+use AppBundle\EntityHandlers\Inquiry;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -28,38 +28,35 @@ class InquiryController extends FOSRestController
      */
     public function postAction(Request $request, LoggerInterface $logger) : View
     {
-        $inquiry = new Inquiry();
-        $inquiry->setEmail($request->get('email', ''));  //set email for inquiry
-        $inquiry->setMessage($request->get('message', ''));   //set message for inquiry
 
         try {
-
-            /** @var AppBundle\Repository\InquiryRepository $repository */
-
-            $repository = $this->getDoctrine()->getRepository(Inquiry::class);
-            $repository->validateInquiry($inquiry);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($inquiry);
-            $em->flush();
+            $inquiryHandler = new Inquiry($this->getDoctrine()->getManager());
+            if($inquiryHandler->create(
+                [
+                'email' => $request->get('email', ''),
+                'message' => $request->get('message', ''),
+                ]
+            )) {
+                $message = 'Message sent successfully.';
+                $statusCode = $responseCode = Response::HTTP_OK;
+            } else {
+                $message = 'Something went wrong. Please try again after some time.';
+                $statusCode =  Response::HTTP_INTERNAL_SERVER_ERROR  ;
+                $responseCode =Response::HTTP_OK;
+            }
         } catch (\InvalidArgumentException $e) {
-            return new View(
-                [ 'message' => $e->getMessage(), 'status' => Response::HTTP_BAD_REQUEST ],
-                Response::HTTP_BAD_REQUEST
-            );
+            $message = $e->getMessage();
+            $statusCode = $responseCode = Response::HTTP_BAD_REQUEST;
         } catch (\Throwable $e) {
             $logger->error($e->getMessage()); //write error to the log files
-            return new View(
-                [
-                    'message' => 'Something went wrong. Please try again after some time.',
-                    'status' => Response::HTTP_INTERNAL_SERVER_ERROR  // send 500 in the message so that respective action could be performed
-                ],
-                Response::HTTP_OK  // send 200 as the response code
-            );
+            $message = 'Something went wrong. Please try again after some time.';
+            $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+            $responseCode = Response::HTTP_OK ;
         }
 
         return new View(
-            [ 'message' => 'Message sent successfully.', 'status' => Response::HTTP_OK ],
-            Response::HTTP_OK
+            [ 'message' => $message, 'status' => $statusCode ],
+            $responseCode
         );
     }
 }
