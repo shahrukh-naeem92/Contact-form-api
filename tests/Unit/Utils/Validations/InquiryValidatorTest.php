@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\AppBundle\Repository;
+namespace Tests\Unit\Utils\Validations;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use AppBundle\Entity\Inquiry;
@@ -9,7 +9,7 @@ use AppBundle\Entity\Inquiry;
  * Class InquiryRepositoryTest
  * @package Tests\Unit\AppBundle\Repository
  */
-class InquiryRepositoryTest extends KernelTestCase
+class InquiryValidatorTest extends KernelTestCase
 {
 
     /**
@@ -32,7 +32,7 @@ class InquiryRepositoryTest extends KernelTestCase
     }
 
     /**
-     * Tests validateInquiry method of InquiryRepository class.
+     * Tests validate method of InquiryValidator class.
      *
      * @param string $email
      * @param string $message

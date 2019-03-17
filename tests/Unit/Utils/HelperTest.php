@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Unit\Helper;
+namespace Tests\Unit\Utils;
 
 use PHPUnit\Framework\TestCase;
-use Helper\Helper;
+use Utils\Helper;
 use AppBundle\Entity\Inquiry;
 use Symfony\Component\Validator\Validation;
 
