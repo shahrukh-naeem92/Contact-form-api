@@ -6,7 +6,7 @@ namespace AppBundle\EntityHandlers;
  * Abstract HandlerAbstract
  * @package AppBundle\EntityHandlers
  */
-Abstract class HandlerAbstract
+abstract class HandlerAbstract
 {
 
     /**
@@ -20,23 +20,6 @@ Abstract class HandlerAbstract
     protected $em;
 
     /**
-     * @param array $data
-     *
-     * @return bool
-     */
-    public abstract function create(array $data) : boolean;
-
-    /**
-     * @return void
-     */
-    protected abstract function setEntity() : void;
-
-    /**
-     * @return array
-     */
-    protected abstract function getEntitySetters() : array;
-
-    /**
      * Sets entity data from array values
      *
      * @param array $data
@@ -45,7 +28,7 @@ Abstract class HandlerAbstract
      */
     protected function setDataFromArray(array $data) : void
     {
-        foreach($data as $k => $v) {
+        foreach ($data as $k => $v) {
             $this->entity->{$this->getEntitySetters()[$k]}($v);
         }
     }
@@ -62,4 +45,21 @@ Abstract class HandlerAbstract
 
         return $this->entity->getId();
     }
+
+    /**
+     * @param array $data
+     *
+     * @return bool
+     */
+    abstract public function create(array $data) : bool;
+
+    /**
+     * @return void
+     */
+    abstract protected function setEntity() : void;
+
+    /**
+     * @return array
+     */
+    abstract protected function getEntitySetters() : array;
 }

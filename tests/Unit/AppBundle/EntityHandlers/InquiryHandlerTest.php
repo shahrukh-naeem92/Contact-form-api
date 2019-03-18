@@ -30,6 +30,7 @@ class InquiryHandlerTest extends TestCase
             ->setMethods(['save'])
             ->getMock();
         $inquiryHandler->method('save')->willReturn($id);
+        $inquiryHandler->setEntity();
         if (empty($email) || empty($message)) {
             $this->expectException(\InvalidArgumentException::class);
             $inquiryHandler->create(['email' => $email, 'message' => $message]);

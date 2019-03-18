@@ -34,7 +34,7 @@ class InquiryHandler extends HandlerAbstract
      *
      * @return void
      */
-    protected function setEntity(): void
+    public function setEntity(): void
     {
         $this->entity = new Inquiry();
     }
@@ -61,7 +61,7 @@ class InquiryHandler extends HandlerAbstract
      *
      * @return bool
      */
-    public function create(array $data) : boolean
+    public function create(array $data) : bool
     {
         $this->setDataFromArray($data);
         $this->validate();

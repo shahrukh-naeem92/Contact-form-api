@@ -31,7 +31,7 @@ class InquiryController extends FOSRestController
 
         try {
             $inquiryHandler = new InquiryHandler($this->getDoctrine()->getManager());
-            if($inquiryHandler->create(
+            if ($inquiryHandler->create(
                 [
                 'email' => $request->get('email', ''),
                 'message' => $request->get('message', ''),

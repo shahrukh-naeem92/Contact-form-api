@@ -3,6 +3,7 @@
 namespace Tests\Unit\Utils\Validations;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Utils\Validations\InquiryValidator;
 use AppBundle\Entity\Inquiry;
 
 /**
@@ -43,17 +44,16 @@ class InquiryValidatorTest extends KernelTestCase
      */
     public function testValidateInquiry(string $email, string $message) : void
     {
-        $repo = $this->entityManager
-            ->getRepository(Inquiry::class) ;
+        $validator = new InquiryValidator();
         $inquiry = new Inquiry();
         $inquiry->setEmail($email);
         $inquiry->setMessage($message);
 
         if (empty($email) || empty($message)) {
             $this->expectException(\InvalidArgumentException::class);
-            $repo->validateInquiry($inquiry);
+            $validator->validate($inquiry);
         } else {
-            $this->assertEquals('', $repo->validateInquiry($inquiry));
+            $this->assertEquals('', $validator->validate($inquiry));
         }
     }
 
